@@ -27,6 +27,8 @@ app.get("/", (req, res) => {
 
 // CHANGE 1: /auth/login endpoint
 app.post("/auth/login", (req, res) => {
+  console.log("[Login] Attempting login");
+
   try {
     const { email, password } = req.body;
 
@@ -37,6 +39,7 @@ app.post("/auth/login", (req, res) => {
     // Generate session and OTP
     const loginSessionId = Math.random().toString(36).substring(7);
     const otp = Math.floor(100000 + Math.random() * 900000); // 6-digit OTP
+    console.log(`[OTP] Session ${loginSessionId} OTP: ${otp}`);
 
     // Store session with 2-minute expiry
     loginSessions[loginSessionId] = {
