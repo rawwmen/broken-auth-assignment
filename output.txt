@@ -1,0 +1,61 @@
+===== 1. LOGIN =====
+POST /auth/login
+
+Request Body:
+{
+  "email": "user@test.com",
+  "password": "123"
+}
+
+Response:
+{
+  "message": "OTP sent",
+  "loginSessionId": "s3u0d"
+}
+
+
+===== 2. VERIFY OTP =====
+POST /auth/verify-otp
+
+Request Body:
+{
+  "loginSessionId": "s3u0d",
+  "otp": "434655"
+}
+
+Response:
+{
+  "message": "OTP verified",
+  "sessionId": "s3u0d"
+}
+
+
+===== 3. GENERATE TOKEN =====
+POST /auth/token
+
+Header:
+Authorization: Bearer s3u0d
+
+Response:
+{
+  "access_token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InVzZXJAdGVzdC5jb20iLCJzZXNzaW9uSWQiOiJCZWFyZXIgczN1MGQiLCJpYXQiOjE3NzMyMjg5MzQsImV4cCI6MTc3MzIyOTgzNH0.3X1vr8o1azb22fXvDb8YhuYBqK9u_00fnH_APf9EvTc",
+  "expires_in": 900
+}
+
+
+===== 4. ACCESS PROTECTED ROUTE =====
+GET /protected
+
+Header:
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InVzZXJAdGVzdC5jb20iLCJzZXNzaW9uSWQiOiJCZWFyZXIgczN1MGQiLCJpYXQiOjE3NzMyMjg5MzQsImV4cCI6MTc3MzIyOTgzNH0.3X1vr8o1azb22fXvDb8YhuYBqK9u_00fnH_APf9EvTc
+
+Response:
+{
+  "message": "Access granted",
+  "user": {
+    "email": "user@test.com"
+  },
+  "success_flag": "FLAG-dXNlckB0ZXN0LmNvbV9DT01QTEVURURfQVNTSUdOTUVOVA=="
+}
+
+flag: "FLAG-dXNlckB0ZXN0LmNvbV9DT01QTEVURURfQVNTSUdOTUVOVA=="
