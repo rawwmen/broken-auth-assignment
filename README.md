@@ -109,3 +109,25 @@ To submit your assignment:
     *   This file must contain the terminal output of all 4 test commands (Login, Verify OTP, Get Token, Access Protected Route).
     *   Ensure the final command's output showing the `success_flag` is clearly visible in this file.
 3.  Share the link to your repository.
+
+## Solution
+
+### Authentication Flow Completed
+
+1. POST /auth/login → received loginSessionId
+2. POST /auth/verify-otp → OTP verified
+3. POST /auth/token → JWT access token generated
+4. GET /protected → accessed protected resource successfully
+
+### Output
+
+See `output.txt` for the complete terminal output of all commands.
+
+### Security Issues Identified
+
+- Hardcoded fallback JWT secret (`default-secret-key`)
+- OTP verification endpoint lacks rate limiting
+
+### Result
+
+Successfully retrieved the protected resource and completion flag.
